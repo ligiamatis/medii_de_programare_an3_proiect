@@ -1,0 +1,8 @@
+{
+  "dependencies": {
+    "mssql1": {
+      "type": "mssql",
+      "connectionId": "ConnectionStrings:Matis_Ligia_Estera_ProiectExamenContext"
+    }
+  }
+}
