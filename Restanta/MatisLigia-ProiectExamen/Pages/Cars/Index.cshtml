@@ -1,0 +1,82 @@
+﻿@page "/{id:int?}"
+@model MatisLigia_ProiectExamen.Pages.Cars.IndexModel
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1 style="color:darkslategrey; font-size:small;">Select your favorite model from bellow</h1>
+
+<p>
+    <a asp-page="Create">Add new car</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Car[0].CarModel)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Car[0].Capacity)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Car[0].Price)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Car[0].LunchDate)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Car[0].Brand.BrandName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Car[0].CarConditions)
+            </th>
+            <th></th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model.CarD.Cars)
+        {
+
+            string selectedRow = "";
+            if (item.ID == Model.CarID)
+            {
+                selectedRow = "table-success";
+            }
+
+            <tr class="@selectedRow">
+                <td>
+                    @Html.DisplayFor(modelItem => item.CarModel)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Capacity)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Price)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.LunchDate)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Brand.BrandName)
+                </td>
+
+                <td>
+                    @{
+                        foreach (var category in item.CarConditions)
+                        {
+                            @category.Condition.ID @: @category.Condition.ConditionName <br />
+                        }
+                    }
+                </td>
+
+                <td>
+                    <a asp-page="./Edit" asp-route-id="@item.ID">Edit</a> |
+                    <a asp-page="./Details" asp-route-id="@item.ID">Details</a> |
+                    <a asp-page="./Delete" asp-route-id="@item.ID">Delete</a>
+                </td>
+            </tr>
+            }
+        </tbody>
+</table>
